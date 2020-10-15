@@ -1,16 +1,29 @@
 import React from 'react';
-import './Form.css'
 
-export default function Form() {
+export default function Form(props) {
+    const { values, change, errors, submit } = props;
+
+    const onSubmit = (evt) => {
+        evt.preventDefault();
+        submit()
+    }
+
+    const onChange = (evt) => {
+        const { name, value, type, checked } = evt.target;
+        const valueToUse = type === "checkbox" ? checked : value;
+        change(name, valueToUse);
+    };
 
 return (
-<form>
-    
+<form onSubmit={onSubmit}>
     <label>
-        name:
+        Name:
         <input
         type="text"
-        name="name" />
+        name="name"
+        value={values.name}
+        onChange={onChange} 
+        />
     </label>
 
     <br />
@@ -19,7 +32,10 @@ return (
         Email:
         <input
         type="text"
-        email="email" />
+        name="email" 
+        value={values.email}
+        onChange={onChange}
+        />
     </label>
 
     <br />
@@ -28,17 +44,35 @@ return (
         Password:
         <input
         type="text"
-        email="password" />
+        name="password" 
+        value={values.password}
+        onChange={onChange}
+        />
     </label>
 
     <br />
 
-    <input type="checkbox" id="termsConditions" name="agree" value="terms" />
-    <label> Agree to Terms and Conditions </label>
+    <label>
+        Agree to Terms and Conditions 
+        <input 
+        type="checkbox" 
+        id="termsConditions" 
+        name="terms" 
+        value={values.terms} 
+        onChange={onChange}
+        />
+    </label>
 
     <br />
 
-    <button className="btn" type="submit"> Submit </button>
+    <button type="submit"> Submit </button>
+
+    <div className="errors">
+        <div>{errors.name}</div>
+        <div>{errors.email}</div>
+        <div>{errors.password}</div>
+        <div>{errors.terms}</div>
+    </div>
 
 </form>
 )
