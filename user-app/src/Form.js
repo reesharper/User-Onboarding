@@ -31,7 +31,7 @@ return (
     <label>
         Email:
         <input
-        type="text"
+        type="email"
         name="email" 
         value={values.email}
         onChange={onChange}

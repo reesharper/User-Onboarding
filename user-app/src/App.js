@@ -30,10 +30,10 @@ export default function App() {
   const getUsers = () => {
     axios.get(`https://reqres.in/api/users`)
       .then((res) => {
-        setUsers(res.data);
+        setUsers(res.results.data);
       })
       .catch((err) => {
-        // debugger
+        debugger
         console.log(`GET ERROR`);
       });
   };
@@ -103,8 +103,8 @@ return (
   errors={formErrors}
   />
 
-  {users.map((user) => {
-        return <User key={user.id} details={user} />;
+  {users.map((userItem) => {
+        return <User key={userItem.id} details={userItem} />;
     })}
 
   </div>

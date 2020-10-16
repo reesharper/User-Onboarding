@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 export default Yup.object().shape({
   name: Yup
     .string()
-    .required("name is required"),
+    .required("Name is required"),
   email: Yup
     .string()
     .email("Must be a valid email address.")
